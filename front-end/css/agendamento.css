@@ -1,0 +1,175 @@
+/* ==========================================================================
+   CSS DO FLUXO DE AGENDAMENTO - REGIA & TINAS CARE
+   ========================================================================== */
+
+:root {
+    --brand-pink: #FE8697;
+    --brand-pink-hover: #e57585;
+    --bg-light-pink: #fff5f6;
+}
+
+.step {
+    display: none;
+    animation: fadeIn 0.4s ease-out;
+}
+.step.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.bg-brand { background-color: var(--brand-pink) !important; }
+.text-brand { color: var(--brand-pink) !important; }
+.spinner-border.text-brand { color: var(--brand-pink) !important; }
+
+.progress-container { 
+    margin-bottom: 2.5rem; 
+}
+.progress {
+    height: 12px; 
+    border-radius: 10px;
+    background-color: #e9ecef;
+}
+.progress-bar {
+    background-color: var(--brand-pink);
+    transition: width 0.5s ease-in-out;
+    border-radius: 10px;
+}
+
+.btn-brand {
+    background-color: var(--brand-pink);
+    color: white;
+    border: none;
+    font-weight: 600;
+    border-radius: 25px;
+    padding: 10px 25px;
+    transition: 0.3s;
+}
+.btn-brand:hover {
+    background-color: var(--brand-pink-hover);
+    color: white;
+    transform: translateY(-2px);
+}
+.btn-brand:disabled {
+    background-color: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-outline-brand {
+    color: var(--brand-pink);
+    border: 2px solid var(--brand-pink);
+    font-weight: 600;
+    border-radius: 25px;
+    padding: 8px 25px;
+    background: transparent;
+    transition: 0.3s;
+}
+.btn-outline-brand:hover {
+    background-color: var(--bg-light-pink);
+    color: var(--brand-pink);
+}
+
+#calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-top: 15px;
+}
+.calendar-day-name {
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 10px;
+    font-size: 0.85rem;
+    color: #6c757d;
+    text-transform: uppercase;
+}
+.calendar-day {
+    padding: 15px 5px;
+    text-align: center;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background-color: white;
+}
+.calendar-day.disabled {
+    background-color: #f8f9fa;
+    color: #ccc;
+    cursor: not-allowed;
+    border-color: #f1f1f1;
+}
+.calendar-day.available:hover {
+    background-color: var(--bg-light-pink);
+    border-color: var(--brand-pink);
+    color: var(--brand-pink);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(254, 134, 151, 0.15);
+}
+.calendar-day.selected {
+    background-color: var(--brand-pink);
+    color: white;
+    font-weight: bold;
+    border-color: var(--brand-pink);
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(254, 134, 151, 0.3);
+}
+
+#time-slots-container {
+    min-height: 200px;
+    max-height: 350px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+#time-slots-container::-webkit-scrollbar { width: 6px; }
+#time-slots-container::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+#time-slots-container::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+#time-slots-container::-webkit-scrollbar-thumb:hover { background: var(--brand-pink); }
+
+.time-slot {
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 10px !important;
+    margin-bottom: 8px;
+    border: 1px solid #eee;
+    transition: 0.2s;
+    text-align: center;
+}
+.time-slot.list-group-item-action:hover {
+    background-color: var(--bg-light-pink);
+    color: var(--brand-pink);
+    border-color: var(--brand-pink);
+}
+.time-slot.selected {
+    background-color: var(--brand-pink) !important;
+    color: white !important;
+    border-color: var(--brand-pink);
+    box-shadow: 0 4px 10px rgba(254, 134, 151, 0.2);
+}
+
+#new-pet-fields { 
+    display: none; 
+    animation: fadeIn 0.4s;
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px dashed var(--brand-pink);
+    margin-top: 15px;
+}
+
+.form-select-lg {
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+}
+
+.form-label.fw-bold {
+    font-size: 0.95rem;
+    color: #444;
+}
