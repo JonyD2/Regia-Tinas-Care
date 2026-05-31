@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossas Lojas | Regia & Tinas Care</title>
+    
+    <link rel="icon" type="image/png" href="../img/logo_pequena4.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        :root { 
+            /* Cores Globais da Marca */
+            --brand-pink: #FE8697; 
+            --brand-pink-hover: #e57585;
+            --brand-pink-light: #fff5f6;
+            --bg-light: #f8f9fa; 
+            --text-main: #2d3436;
+            --text-muted: #64748b;
+            --card-shadow: 0 16px 40px rgba(242, 145, 159, 0.08), 0 6px 16px rgba(0, 0, 0, 0.02);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body { 
+            background-color: var(--bg-light); 
+            font-family: 'Poppins', sans-serif; 
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* --- Navbar Padronizada (Igual Veterinária) --- */
+        .navbar { background-color: var(--brand-pink) !important; padding: 0.8rem 1rem; }
+        .btn-back { 
+            border-radius: 20px; 
+            border: 1px solid rgba(255,255,255,0.5); 
+            transition: var(--transition-smooth);
+            background: rgba(255,255,255,0.1);
+            color: white !important;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 18px;
+        }
+        .btn-back:hover { background: white !important; color: var(--brand-pink) !important; }
+        .navbar-brand { color: white !important; font-weight: 700; letter-spacing: 0.5px; }
+
+        /* Painel do Cabeçalho */
+        .header-icon-box {
+            width: 56px; height: 56px;
+            background-color: var(--brand-pink-light);
+            color: var(--brand-pink);
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; margin: 0 auto 15px auto;
+            box-shadow: 0 4px 12px rgba(254, 134, 151, 0.1);
+        }
+
+        /* Cards Premium da Loja */
+        .store-card { 
+            border: none; border-radius: 36px; background: #ffffff; 
+            overflow: hidden; box-shadow: var(--card-shadow); 
+            border: 1px solid #f1f5f9; transition: var(--transition-smooth);
+            height: 100%; display: flex; flex-direction: column;
+        }
+        .store-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(242, 145, 159, 0.12); }
+        
+        .store-img-container { position: relative; background-color: #f1f5f9; overflow: hidden; width: 100%; height: 260px; }
+        .store-img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition-smooth); }
+        .store-card:hover .store-img { transform: scale(1.05); }
+        
+        .store-badge {
+            position: absolute; top: 20px; left: 20px;
+            background-color: rgba(255, 255, 255, 0.95); color: var(--text-main);
+            font-weight: 600; font-size: 0.78rem; padding: 6px 14px;
+            border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-transform: uppercase;
+        }
+
+        .info-unidade { padding: 2.2rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; }
+
+        .address-box {
+            background: linear-gradient(135deg, #ffffff 0%, var(--brand-pink-light) 100%);
+            padding: 1rem; border-radius: 20px; border: 1px solid #fec0c8;
+            text-decoration: none; display: block; color: var(--text-main);
+            transition: var(--transition-smooth); box-shadow: 0 4px 12px rgba(254, 134, 151, 0.04);
+        }
+        .address-box:hover { background: #fee2e5; transform: scale(1.02); color: var(--brand-pink-hover); }
+        
+        .btn-whatsapp { 
+            background-color: #25D366; color: white !important; 
+            border-radius: 30px; font-weight: 600; font-size: 0.92rem;
+            padding: 10px 24px; text-decoration: none; display: inline-flex;
+            align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
+            transition: var(--transition-smooth);
+        }
+        .btn-whatsapp:hover { background-color: #20ba59; transform: translateY(-2px); }
+
+        /* Footer Padronizado */
+        .main-footer { background-color: #1e272e; color: #dfe6e9; padding: 60px 0 30px; margin-top: 5rem; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm sticky-top">
+        <div class="container">
+             <a class="btn btn-back fw-bold d-flex align-items-center" href="../index.html">
+                 <i class="bi bi-house-door me-2"></i> Início
+             </a>
+             <span class="navbar-brand fw-bold mx-auto d-none d-md-block">NOSSAS UNIDADES</span>
+             <div style="width: 100px;" class="d-none d-lg-block"></div> </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="text-center mb-5">
+            <div class="header-icon-box shadow-sm">
+                <i class="bi bi-geo-alt-fill"></i>
+            </div>
+            <h2 class="fw-bold text-dark mb-2">Unidades Care 🐾</h2>
+            <p class="text-muted small">Clique sobre o card de endereço para traçar a rota diretamente no mapa!</p>
+        </div>
+
+        <div id="lista-unidades" class="row justify-content-center g-4">
+            <div class="col-12 text-center py-5">
+                <div class="spinner-border" style="color: var(--brand-pink) !important;" role="status"></div>
+                <p class="mt-3 text-muted small">Buscando informações das lojas...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container text-center small opacity-50">
+            <p>© 2026 REGIA & TINA'S CARE | Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../js/loja.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
