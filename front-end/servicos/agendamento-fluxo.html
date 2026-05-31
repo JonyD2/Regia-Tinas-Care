@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento | Regia & Tinas Care</title>
+    
+    <link rel="icon" type="image/png" href="img/logo_pequena4.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        :root { 
+            --brand-pink: #FE8697; 
+            --brand-pink-hover: #fc6c81;
+            --brand-pink-light: #fff5f6;
+            --bg-light: #f8fafc; 
+            --text-main: #2c3e50;
+            --text-muted: #64748b;
+            --card-shadow: 0 16px 40px rgba(242, 145, 159, 0.08), 0 6px 16px rgba(0, 0, 0, 0.02);
+        }
+
+        body { background-color: var(--bg-light); font-family: 'Poppins', sans-serif; color: var(--text-main); }
+        .text-brand { color: var(--brand-pink) !important; }
+        .bg-brand { background-color: var(--brand-pink) !important; }
+
+        .navbar { background-color: #ffffff !important; padding: 1.2rem 0; border-bottom: 1px solid #edf2f7; }
+        .btn-voltar-home { border: 1px solid #e2e8f0; color: var(--text-main) !important; border-radius: 24px; background: #ffffff; font-weight: 500; padding: 8px 18px; text-decoration: none; }
+        
+        .progress { height: 8px; border-radius: 10px; background-color: #f1f5f9; overflow: visible; }
+        .progress-bar { background-color: var(--brand-pink); border-radius: 10px; position: relative;}
+        
+        .card-agendamento { border: none; border-radius: 36px; box-shadow: var(--card-shadow); background: white; }
+        .step { display: none; }
+        .step.active { display: block; animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .form-select, .form-control { border-radius: 16px; border: 1px solid #e2e8f0; padding: 16px 20px; background-color: #f8fafc; color: var(--text-main); }
+        .form-select:focus, .form-control:focus { border-color: var(--brand-pink); box-shadow: 0 0 0 4px rgba(254, 134, 151, 0.15); background-color: #ffffff; }
+
+        .btn-brand { background-color: var(--brand-pink); color: white; border: none; border-radius: 30px; padding: 14px 40px; font-weight: 600; box-shadow: 0 6px 18px rgba(254, 134, 151, 0.3); }
+        .btn-brand:hover:not(:disabled) { background-color: var(--brand-pink-hover); }
+        .btn-brand:disabled { background-color: #cbd5e1; box-shadow: none; }
+        .btn-prev { background: transparent; border: none; font-weight: 600; color: #94a3b8; }
+
+        #calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+        .calendar-day { padding: 12px 8px; border-radius: 14px; cursor: pointer; text-align: center; font-weight: 600; font-size: 0.95rem; color: var(--text-main); }
+        .calendar-day:hover:not(.disabled) { background-color: var(--brand-pink-light); color: var(--brand-pink); }
+        .calendar-day.selected { background-color: var(--brand-pink) !important; color: white !important; }
+        .calendar-day.disabled { color: #cbd5e1; cursor: not-allowed; opacity: 0.4; }
+        .calendar-day-name { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; text-align: center; font-weight: 700; }
+
+        .summary-box { background: linear-gradient(135deg, #ffffff 0%, var(--brand-pink-light) 100%); border: 1px solid #fec0c8; border-radius: 24px; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg shadow-sm sticky-top mb-4">
+        <div class="container">
+            <a class="btn-voltar-home d-flex align-items-center small" href="../index.html">
+                <i class="bi bi-arrow-left me-2"></i> Cancelar
+            </a>
+            <span class="fw-bold mx-auto text-dark" style="letter-spacing: 0.5px;">CENTRO DE MARCAÇÃO</span>
+            <div style="width: 100px;" class="d-none d-md-block"></div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        
+        <div id="login-block" class="card card-agendamento p-5 text-center mx-auto" style="max-width: 600px; display: none;">
+            <i class="bi bi-shield-lock-fill text-brand display-1 mb-4"></i>
+            <h2 class="fw-bold text-dark mb-3">Identificação Necessária</h2>
+            <p class="text-muted mb-5">Para iniciarmos o seu agendamento e localizarmos o cadastro do seu pet, você precisa acessar a sua conta.</p>
+            <button onclick="irParaLogin()" class="btn btn-brand btn-lg w-100 py-3 rounded-pill shadow-sm">
+                Fazer Login ou Cadastrar <i class="bi bi-box-arrow-in-right ms-2"></i>
+            </button>
+        </div>
+
+        <div id="agendamento-wizard" style="display: none;">
+            <div class="text-center mb-5">
+                <p class="small text-muted fw-bold text-uppercase mb-3">Sua vaga em tempo real no Neon DB</p>
+                <div class="progress mx-auto" style="max-width: 600px;">
+                    <div class="progress-bar" id="step-progressbar" style="width: 20%"></div>
+                </div>
+            </div>
+
+            <div class="card card-agendamento p-4 p-md-5 mx-auto" style="max-width: 850px;">
+                
+                <div id="step-1" class="step active">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-brand bg-opacity-10 p-3 rounded-circle me-3"><i class="bi bi-scissors text-brand fs-4"></i></div>
+                        <h3 class="fw-bold mb-0 text-dark">O que vamos fazer hoje?</h3>
+                    </div>
+                    <div class="mb-4">
+                        <select class="form-select form-select-lg" id="service-select">
+                            <option value="" selected disabled>Carregando serviços...</option>
+                        </select>
+                    </div>
+                    <div class="text-end mt-5">
+                        <button id="nextButtonStep1" class="btn btn-brand btn-lg" disabled>Avançar <i class="bi bi-arrow-right ms-2"></i></button>
+                    </div>
+                </div>
+
+                <div id="step-2" class="step">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-brand bg-opacity-10 p-3 rounded-circle me-3"><i class="bi bi-geo-alt-fill text-brand fs-4"></i></div>
+                        <h3 class="fw-bold mb-0 text-dark">Onde será o atendimento?</h3>
+                    </div>
+                    <div class="mb-4">
+                        <select class="form-select form-select-lg" id="store-select">
+                            <option value="" selected disabled>Carregando unidades...</option>
+                        </select>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-5">
+                        <button type="button" class="btn-prev"><i class="bi bi-arrow-left me-2"></i>Voltar</button>
+                        <button id="nextButtonStep2" class="btn btn-brand btn-lg" disabled>Ver Calendário <i class="bi bi-calendar-date ms-2"></i></button>
+                    </div>
+                </div>
+
+                <div id="step-3" class="step">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-brand bg-opacity-10 p-3 rounded-circle me-3"><i class="bi bi-clock-history text-brand fs-4"></i></div>
+                        <h3 class="fw-bold mb-0 text-dark">Escolha o melhor momento</h3>
+                    </div>
+                    <div class="row g-4 mt-2">
+                        <div class="col-md-7">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <button id="prevMonthButton" class="btn btn-sm btn-light border p-2"><i class="bi bi-chevron-left"></i></button>
+                                <h5 id="calendar-month-year" class="mb-0 fw-bold text-dark text-capitalize">...</h5>
+                                <button id="nextMonthButton" class="btn btn-sm btn-light border p-2"><i class="bi bi-chevron-right"></i></button>
+                            </div>
+                            <div id="calendar-grid" class="mt-2"></div>
+                        </div>
+                        <div class="col-md-5 ps-md-4 border-start">
+                            <div id="time-slots-container">
+                                <p class="small text-muted text-center py-5">Selecione uma data ao lado.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mt-5 pt-4 border-top">
+                        <button type="button" class="btn-prev"><i class="bi bi-arrow-left me-2"></i>Voltar</button>
+                        <button id="nextButtonStep3" class="btn btn-brand btn-lg" disabled>Quem é o Pet? <i class="bi bi-paw-fill ms-2"></i></button>
+                    </div>
+                </div>
+
+                <div id="step-4" class="step">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="bg-brand bg-opacity-10 p-3 rounded-circle me-3"><i class="bi bi-hearts text-brand fs-4"></i></div>
+                        <h3 class="fw-bold mb-0 text-dark">Quem é o fofinho(a)?</h3>
+                    </div>
+                    <form id="pet-info-form">
+                        <div class="mb-4" id="select-pet-container">
+                            <label class="form-label text-muted small fw-semibold">Animais Vinculados à Sua Conta</label>
+                            <select class="form-select form-select-lg" id="select-pet" required></select>
+                        </div>
+                        
+                        <div id="new-pet-fields" style="display: none;" class="bg-light p-4 rounded-4 mb-4 border">
+                            <h6 class="fw-bold text-dark mb-3">➕ Ficha do Novo Amiguinho</h6>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label small text-muted">Nome do Pet *</label>
+                                    <input type="text" id="nome_pet" class="form-control bg-white">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small text-muted">Raça (Opcional)</label>
+                                    <input type="text" id="raca" class="form-control bg-white" placeholder="Ex: Poodle, Golden, SRD">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small text-muted">Porte *</label>
+                                    <select id="porte" class="form-select bg-white">
+                                        <option value="Pequeno">Pequeno (Até 10kg)</option>
+                                        <option value="Médio" selected>Médio (11kg a 25kg)</option>
+                                        <option value="Grande">Grande (Acima de 25kg)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label text-muted small fw-semibold">Notas e Recomendações de Cuidado</label>
+                            <textarea id="observacoes" class="form-control" rows="3" placeholder="Ex: Alergia a perfumes, restrições médicas, ou corte específico..."></textarea>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-5">
+                            <button type="button" class="btn-prev"><i class="bi bi-arrow-left me-2"></i>Voltar</button>
+                            <button type="submit" id="nextButtonStep4" class="btn btn-brand btn-lg">Revisar Reserva <i class="bi bi-search ms-2"></i></button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="step-5" class="step">
+                    <div class="text-center mb-4">
+                        <i class="bi bi-check-circle-fill text-success display-4"></i>
+                        <h3 class="fw-bold mt-2 text-dark">Confirme seus Dados</h3>
+                    </div>
+                    <div id="confirmation-summary" class="summary-box p-4 mb-5 shadow-sm"></div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn-prev"><i class="bi bi-pencil me-2"></i>Corrigir</button>
+                        <button type="button" id="confirmButton" class="btn btn-success btn-lg px-5 py-3 fw-bold rounded-pill shadow">
+                            CONFIRMAR AGENDAMENTO <i class="bi bi-send-fill ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../js/agendamento.js"></script>
+</body>
+</html>
