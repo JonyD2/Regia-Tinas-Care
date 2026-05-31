@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta - Regia & Tinas Care</title>
+    
+    <link rel="shortcut icon" href="../img/logo_pequena4.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Ribeye&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <link rel="stylesheet" href="../css/auth.css"> 
+
+<style>
+    :root {
+        --cor-principal: #FE8697;
+        --cor-texto-claro: #ffffff;
+    }
+
+    .form-box {
+        background-color: var(--cor-principal) !important; 
+        padding: 40px;
+        border-radius: 15px; 
+        width: 100%;
+        max-width: 450px;
+        box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+
+    .form-header h1 {
+        font-family: 'Inknut Antiqua', serif;
+        font-size: 1.5rem;
+        color: var(--cor-texto-claro) !important;
+        margin: 0;
+    }
+
+    /* Estilização dos Inputs */
+    .input-group {
+        position: relative;
+        margin-bottom: 15px;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        box-sizing: border-box;
+    }
+
+    /* --- O OLHINHO VOLTOU AQUI --- */
+    .eye-icon {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #666; /* Cor cinza para destacar no fundo branco do input */
+        z-index: 10;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Garante que o texto não fique embaixo do olho */
+    #senha, #confirmar_senha {
+        padding-right: 45px;
+    }
+
+    .btn-solid {
+        background-color: #ffffff !important;
+        color: var(--cor-principal) !important;
+        border: none;
+        padding: 12px;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .login-link {
+        text-align: center;
+        margin-top: 20px;
+        color: white;
+    }
+
+    .login-link a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+    
+    <header class="auth-header">Regia & Tinas Care</header>
+
+    <div class="form-container">
+        <div class="form-box">
+            <div class="form-header">
+                <a href="login.html" class="back-button"><i class="bi bi-arrow-left" style="color: white; font-size: 1.5rem;"></i></a>
+                <h1>Crie sua conta</h1>
+            </div>
+            
+            <form id="criarContaForm">
+                <div class="input-group">
+                    <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                </div>
+                
+                <div class="input-group">
+                    <input type="password" id="senha" name="senha" placeholder="Crie uma senha" required>
+                    <i class="bi bi-eye-fill eye-icon" id="togglePassword"></i>
+                </div>
+                
+                <div class="input-group">
+                    <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirme sua senha" required>
+                    <i class="bi bi-eye-fill eye-icon" id="toggleConfirmPassword"></i>
+                </div>
+                
+                <button type="submit" class="btn btn-solid">CRIAR CONTA</button>
+            </form>
+
+            <div class="login-link">
+                <span>Já possui uma conta? <a href="login.html">Entrar</a></span>
+            </div>
+        </div> 
+    </div>
+
+    <script>
+        // Lógica para os dois olhinhos funcionarem
+        function vincularOlhinho(idIcone, idInput) {
+            const icone = document.getElementById(idIcone);
+            const input = document.getElementById(idInput);
+
+            icone.addEventListener('click', function () {
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icone.classList.remove('bi-eye-fill');
+                    icone.classList.add('bi-eye-slash-fill');
+                } else {
+                    input.type = 'password';
+                    icone.classList.remove('bi-eye-slash-fill');
+                    icone.classList.add('bi-eye-fill');
+                }
+            });
+        }
+
+        vincularOlhinho('togglePassword', 'senha');
+        vincularOlhinho('toggleConfirmPassword', 'confirmar_senha');
+    </script>
+
+    <script src="../js/criar_conta.js" type="module"></script>
+</body>
+</html>

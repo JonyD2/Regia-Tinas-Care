@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Pets - Regia & Tinas Care</title>
+    <link rel="icon" type="image/png" href="../img/logo_pequena4.png">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { 
+            --brand-pink: #FE8697; 
+            --brand-pink-hover: #fc6c81;
+            --brand-pink-light: #fff5f6;
+            --bg-light: #f8fafc; 
+            --text-main: #2c3e50;
+            --text-muted: #64748b;
+            --card-shadow: 0 10px 30px rgba(242, 145, 159, 0.06), 0 4px 12px rgba(0, 0, 0, 0.02);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body { 
+            background-color: var(--bg-light); 
+            font-family: 'Poppins', sans-serif; 
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* Navbar Moderna Neutra com Destaques */
+        .navbar { 
+            background-color: #ffffff !important; 
+            padding: 1.2rem 0; 
+            border-bottom: 1px solid #edf2f7;
+        }
+        .navbar-brand-title {
+            font-size: 1.3rem;
+            color: var(--text-main);
+        }
+        .btn-voltar { 
+            border: 1px solid #e2e8f0; 
+            color: var(--text-main) !important;
+            border-radius: 24px; 
+            background: #ffffff;
+            font-weight: 500;
+            transition: var(--transition-smooth); 
+        }
+        .btn-voltar:hover { 
+            background: #f1f5f9; 
+            border-color: #cbd5e1;
+            transform: translateX(-3px);
+        }
+        
+        /* Abas de Navegação em Cápsula (Premium Pill Tabs) */
+        .nav-pills-container {
+            background: #ffffff;
+            padding: 8px;
+            border-radius: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            display: inline-flex;
+            border: 1px solid #edf2f7;
+        }
+        .custom-nav-tabs .nav-link { 
+            color: var(--text-muted); 
+            font-weight: 500; 
+            border: none; 
+            padding: 10px 24px; 
+            border-radius: 25px;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+        }
+        .custom-nav-tabs .nav-link:hover { 
+            color: var(--brand-pink); 
+            background: var(--brand-pink-light); 
+        }
+        .custom-nav-tabs .nav-link.active { 
+            color: #ffffff !important; 
+            font-weight: 600;
+            background-color: var(--brand-pink) !important;
+            box-shadow: 0 4px 14px rgba(254, 134, 151, 0.35);
+        }
+
+        /* Cabeçalho da Seção Principal */
+        .dashboard-header-panel {
+            background: linear-gradient(135deg, #ffffff 0%, #fffcfc 100%);
+            border: 1px solid #fcf0f2;
+        }
+        .header-icon-box {
+            width: 56px;
+            height: 56px;
+            background-color: var(--brand-pink-light);
+            color: var(--brand-pink);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+
+        /* Botões Estilizados */
+        .btn-brand { 
+            background-color: var(--brand-pink); 
+            color: white; 
+            border-radius: 30px; 
+            font-weight: 600; 
+            border: none;
+            padding: 12px 28px;
+            font-size: 0.95rem;
+            box-shadow: 0 6px 18px rgba(254, 134, 151, 0.3);
+            transition: var(--transition-smooth);
+        }
+        .btn-brand:hover { 
+            background-color: var(--brand-pink-hover); 
+            color: white; 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(254, 134, 151, 0.45);
+        }
+
+        /* Grid e Base dos Cards (Renderizados Dinamicamente pelo JS) */
+        .pet-card { 
+            border: none; 
+            border-radius: 24px; 
+            background: #ffffff;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition-smooth);
+            border: 1px solid #f8fafc;
+        }
+        .pet-card:hover { 
+            transform: translateY(-6px); 
+            box-shadow: 0 16px 36px rgba(242, 145, 159, 0.12); 
+        }
+
+        /* Modal Customizado e Clean */
+        .modal-content { 
+            border-radius: 24px; 
+            border: none; 
+            box-shadow: 0 25px 60px rgba(0,0,0,0.08); 
+        }
+        .modal-header { 
+            background: #ffffff;
+            border-bottom: 1px solid #f1f5f9; 
+            padding: 1.5rem 2rem;
+        }
+        .modal-title-icon {
+            color: var(--brand-pink);
+            background-color: var(--brand-pink-light);
+            padding: 8px 12px;
+            border-radius: 12px;
+        }
+        .modal-body {
+            padding: 2rem !important;
+        }
+        
+        /* Inputs Avançados */
+        .form-group-custom {
+            position: relative;
+        }
+        .form-control, .form-select { 
+            border-radius: 14px; 
+            border: 1px solid #e2e8f0; 
+            padding: 12px 16px; 
+            font-size: 0.95rem;
+            background-color: #f8fafc;
+            color: var(--text-main);
+            transition: var(--transition-smooth);
+        }
+        .form-control:focus, .form-select:focus { 
+            border-color: var(--brand-pink); 
+            box-shadow: 0 0 0 4px rgba(254, 134, 151, 0.12); 
+            background-color: #ffffff;
+        }
+        .form-label { 
+            font-weight: 600; 
+            color: #475569; 
+            margin-bottom: 8px; 
+            font-size: 0.88rem;
+            text-transform: uppercase; /* CORREÇÃO: Comando oficial para letras maiúsculas */
+            letter-spacing: 0.5px;
+        }
+
+        /* Rodapé Assinado */
+        footer {
+            background-color: #ffffff;
+            border-top: 1px solid #edf2f7;
+        }
+        .brand-footer-text {
+            color: var(--brand-pink);
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+        .btn-logout {
+            border: 1px solid #fee2e2;
+            color: #dc2626 !important;
+            background-color: #fef2f2;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+        .btn-logout:hover {
+            background-color: #fee2e2;
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg shadow-sm sticky-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <div class="d-flex gap-2">
+                <a class="btn btn-voltar d-flex align-items-center px-3 py-2 small" href="../index.html">
+                    <i class="bi bi-shop me-2"></i>Loja
+                </a>
+            </div>
+
+            <span class="navbar-brand-title fw-bold d-none d-md-block mx-auto">Regia & Tinas Care</span>
+            
+            <div class="d-flex align-items-center">
+                <button id="logout-button" class="btn btn-sm btn-logout px-3 py-1-5">Sair</button>
+            </div>
+        </div>
+    </nav>
+    <main class="container my-5">
+        <div class="text-center mb-5">
+            <div class="nav-pills-container">
+                <ul class="nav nav-pills custom-nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="perfil.html"><i class="bi bi-person-circle me-2"></i>Meu Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="meus_pets.html"><i class="bi bi-balloon-heart-fill me-2"></i>Meus Pets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="meus_agendamentos.html"><i class="bi bi-calendar2-check-fill me-2"></i>Agendamentos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-5 dashboard-header-panel p-4 rounded-4 shadow-sm">
+            <div class="d-flex flex-column flex-sm-row align-items-center text-center text-sm-start mb-3 mb-md-0">
+                <div class="header-icon-box mb-3 mb-sm-0 me-sm-3 shadow-sm">
+                    <i class="bi bi-paw-fill"></i>
+                </div>
+                <div>
+                    <h2 class="fw-bold text-dark mb-1">Meus Pets 🐾</h2>
+                    <p class="text-muted mb-0 small">Acompanhe, cadastre e gerencie a ficha dos membros de quatro patas da família.</p>
+                </div>
+            </div>
+            <button class="btn btn-brand w-100 w-md-auto mt-2 mt-md-0" data-bs-toggle="modal" data-bs-target="#petModal">
+                <i class="bi bi-plus-lg me-2"></i>Adicionar Novo Pet
+            </button>
+        </div>
+
+        <div id="lista-pets" class="row g-4">
+            <div class="col-12 text-center py-5">
+                <div class="spinner-border text-secondary mb-3" style="color: var(--brand-pink) !important;" role="status"></div>
+                <h5 class="text-muted fw-medium">Consultando a base de dados do Neon...</h5>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="petModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header d-flex align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="modal-title-icon me-2 shadow-sm">
+                            <i class="bi bi-stars"></i>
+                        </div>
+                        <h5 class="modal-title fw-bold text-dark mb-0">Cadastrar Amiguinho</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <form id="formCadastroPet">
+                    <div class="modal-body">
+                        <div class="mb-4 form-group-custom">
+                            <label class="form-label">Nome do Pet *</label>
+                            <input type="text" id="nome_pet" class="form-control" placeholder="Ex: Mel, Luke, Frederico..." required>
+                        </div>
+                        
+                        <div class="row g-3 mb-4">
+                            <div class="col-sm-6">
+                                <label class="form-label">Espécie *</label>
+                                <select id="especie" class="form-select" required>
+                                    <option value="Cão" selected>Cão (Cachorro)</option>
+                                    <option value="Gato">Gato (Felino)</option>
+                                    <option value="Outro">Outra Espécie</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label class="form-label">Raça do Pet</label>
+                                <input type="text" id="raca" class="form-control" placeholder="Ex: Golden, Poodle, SRD...">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label">Porte Físico</label>
+                            <select id="porte" class="form-select">
+                                <option value="Pequeno">Pequeno (Até 10kg)</option>
+                                <option value="Médio" selected>Médio (11kg a 25kg)</option>
+                                <option value="Grande">Grande (Acima de 25kg)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <label class="form-label">Notas Clínicas ou Restrições</label>
+                            <textarea id="observacoes" class="form-control" rows="3" placeholder="Possui alguma alergia a produtos? Algum cuidado especial no banho ou comportamento que devemos saber?"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer border-0 p-4 pt-0 bg-white rounded-bottom-4">
+                        <button type="button" class="btn btn-light rounded-pill px-4 fw-bold small text-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-brand px-4 shadow-sm">Salvar Pet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="pt-5 pb-4 mt-5 text-center">
+        <div class="container">
+            <p class="mb-1 fw-bold brand-footer-text">REGIA & TINA'S CARE</p>
+            <p class="small text-muted mb-0">© 2026 - Conectado ao Painel do Tutor com criptografia ativa 🐾</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/meus_pets.js" type="module"></script>
+</body>
+</html>
