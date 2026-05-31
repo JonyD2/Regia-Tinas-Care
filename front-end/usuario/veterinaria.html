@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Clínica Veterinária | Regia & Tinas Care</title>
+    
+    <link rel="icon" type="image/png" href="../img/logo_pequena4.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        :root { 
+            --brand-pink: #FE8697; 
+            --brand-pink-hover: #e57585;
+            --bg-light: #f8f9fa; 
+            --bg-light-pink: #fff5f6;
+            --text-dark: #2d3436;
+        }
+        
+        body { 
+            background-color: var(--bg-light); 
+            color: var(--text-dark); 
+            font-family: 'Poppins', sans-serif; 
+        }
+
+        .text-brand { color: var(--brand-pink) !important; }
+
+        /* --- Navbar Ajustada --- */
+        .navbar { 
+            background-color: var(--brand-pink) !important; 
+            padding: 0.8rem 1rem; 
+        }
+        
+        .btn-back { 
+            border-radius: 20px; 
+            border: 1px solid rgba(255,255,255,0.5); 
+            transition: 0.3s;
+            background: rgba(255,255,255,0.1);
+            color: white !important;
+        }
+        .btn-back:hover { background: white !important; color: var(--brand-pink) !important; }
+
+        /* --- Botão Principal --- */
+        .btn-brand { 
+            background-color: var(--brand-pink); 
+            color: #fff; 
+            border-radius: 30px; 
+            padding: 12px 35px; 
+            border: none; 
+            font-weight: 600; 
+            transition: 0.3s; 
+            box-shadow: 0 4px 15px rgba(254, 134, 151, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-brand:hover { 
+            background-color: var(--brand-pink-hover); 
+            color: #fff; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(254, 134, 151, 0.5);
+        }
+
+        /* --- Galeria de Fotos --- */
+        .gallery-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 1rem; 
+            margin: 3rem 0;
+        }
+        .gallery-grid img { 
+            width: 100%; 
+            height: 220px; 
+            object-fit: cover; 
+            border-radius: 15px; 
+            transition: 0.4s; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08); 
+        }
+        .gallery-grid img:hover { transform: scale(1.02); filter: brightness(1.05); }
+        
+        /* --- Seção de Contato e Cards --- */
+        .contact-section { border-top: 2px dashed #fec0c8; padding-top: 4rem; }
+        
+        .contact-form, .info-card { 
+            background-color: #fff; 
+            padding: 2.5rem; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            height: 100%;
+        }
+        .info-card { 
+            background-color: var(--bg-light-pink); 
+            border: 1px solid #fec0c8; 
+        }
+        .info-card ul { list-style: none; padding: 0; }
+        .info-card li { margin-bottom: 1.5rem; display: flex; align-items: flex-start; }
+        .info-card i { color: var(--brand-pink); font-size: 1.4rem; margin-right: 15px; }
+
+        .main-footer { background-color: #1e272e; color: #dfe6e9; padding: 60px 0 30px; margin-top: 5rem; }
+        .main-footer h5 { color: var(--brand-pink); font-weight: bold; }
+        .main-footer a { color: #b2bec3; text-decoration: none; transition: 0.3s; }
+        .main-footer a:hover { color: white; padding-left: 5px; }
+
+        @media (max-width: 768px) {
+            .display-5 { font-size: 2.2rem; }
+            .gallery-grid img { height: 180px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm sticky-top">
+        <div class="container">
+             <a class="btn btn-back fw-bold d-flex align-items-center" href="../index.html">
+                 <i class="bi bi-house-door me-2"></i> Início
+             </a>
+             
+             <span class="navbar-brand fw-bold mx-auto d-none d-md-block">CLÍNICA VETERINÁRIA 24H</span>
+
+             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navVet">
+                <span class="navbar-toggler-icon"></span>
+             </button>
+
+             <div class="collapse navbar-collapse flex-grow-0" id="navVet">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-white" href="servicos.html">Banho</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="hotel.html">Hotel</a></li>
+                </ul>
+             </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="pe-lg-4">
+                    <h1 class="text-brand fw-bold display-5 mb-3">Saúde e Carinho para seu Pet</h1>
+                    <p class="lead text-muted mb-4">A clínica da <strong>Regia & Tinas Care</strong> oferece medicina preventiva e tratamentos avançados com tecnologia de ponta.</p>
+                    <p class="text-secondary">Contamos com estrutura para exames laboratoriais, vacinação importada e consultas especializadas para cães e gatos de todos os tamanhos.</p>
+                    
+                    <div class="d-grid d-md-block">
+                        <a href="agendamento-fluxo.html" class="btn btn-brand btn-lg mt-4">
+                            <i class="bi bi-calendar-heart me-2"></i> Agendar Consulta
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center"> 
+                <img src="../img/veteri_1.webp" class="img-fluid rounded-5 shadow-lg" alt="Veterinária" style="max-height: 450px; width: 100%; object-fit: cover;">
+            </div>
+        </div>
+
+        <div class="gallery-grid">
+            <img src="../img/veteri_2.webp" alt="Exame">
+            <img src="../img/veteri_3.webp" alt="Consultório">
+            <img src="../img/veteri_4.webp" alt="Cirurgia">
+            <img src="../img/veteri_5.webp" alt="Dentário">
+            <img src="../img/veteri_6.webp" alt="Ouvido">
+            <img src="../img/animal1.webp" alt="Pet Feliz"> 
+        </div>
+
+        <section class="contact-section">
+            <div class="text-center mb-5">
+                <h2 class="text-brand fw-bold">SOLICITE AGORA UM SERVIÇO!</h2>
+                <p class="text-muted">Estamos prontos para atender a urgência ou rotina do seu amigo.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-7">
+                    <div class="contact-form">
+                        <h4 class="fw-bold mb-3"><i class="bi bi-envelope-paper text-brand me-2"></i>Mande uma mensagem</h4>
+                        <p class="text-muted mb-4">Dúvidas sobre vacinas ou procedimentos? Nossa equipe médica responde rápido.</p>
+                        
+                        <form id="contact-form-vet">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold small text-secondary">Nome do Tutor</label>
+                                <input type="text" class="form-control form-control-lg border-0 bg-light" id="nome-vet" required>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold small text-secondary">E-mail</label>
+                                    <input type="email" class="form-control form-control-lg border-0 bg-light" id="email-vet" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-bold small text-secondary">WhatsApp</label>
+                                    <input type="tel" class="form-control form-control-lg border-0 bg-light" id="telefone-vet">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label fw-bold small text-secondary">Como podemos ajudar seu pet?</label>
+                                <textarea class="form-control border-0 bg-light" id="mensagem-vet" rows="4" placeholder="Ex: Preciso saber sobre a vacina V10..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-brand btn-lg w-100">ENVIAR AGORA</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="info-card">
+                        <h4 class="fw-bold mb-4 text-brand">Contatos Médicos</h4>
+                        <ul>
+                            <li>
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <div><strong>Unidade Vila Prudente</strong><br><small class="text-muted">R. Luiz Fiorotti, 394 - Olímpico</small></div>
+                            </li>
+                            <li>
+                                <i class="bi bi-whatsapp"></i>
+                                <div><strong>Plantão WhatsApp</strong><br><a href="https://wa.me/5511971061329" target="_blank" class="fw-bold">(11) 97106-1329</a></div>
+                            </li>
+                            <li>
+                                <i class="bi bi-clock-fill"></i>
+                                <div><strong>Horário de Funcionamento</strong><br><small class="text-muted">Emergência: 24h | Consultas: 08h-20h</small></div>
+                            </li>
+                            <li>
+                                <i class="bi bi-instagram"></i>
+                                <div><strong>Acompanhe as Dicas</strong><br><a href="#" target="_blank">@regiaetinascare</a></div>
+                            </li>
+                        </ul>
+                        <div class="mt-4 p-3 bg-white rounded-3 shadow-sm border-start border-4 border-success">
+                            <p class="small mb-0 fw-bold text-success"><i class="bi bi-check-circle-fill me-2"></i>Veterinários de Plantão</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row text-start mb-5">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">Regia & Tinas Care</h5>
+                    <p class="small opacity-75">Saúde animal levada a sério. Especialistas prontos para cuidar do que você mais ama.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">Serviços</h5>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="servicos.html">Estética Canina</a></li>
+                        <li class="mb-2"><a href="hotel.html">Hospedagem Pet</a></li>
+                        <li class="mb-2"><a href="day_care.html">Creche e Day Care</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="mb-3">Institucional</h5>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#">Trabalhe Conosco</a></li>
+                        <li class="mb-2"><a href="#">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25">
+            <div class="text-center small opacity-50">
+                <p class="mb-0">© 2026 REGIA & TINA'S CARE | CNPJ: 10.864.846/0001-23</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('contact-form-vet');
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const btn = form.querySelector('button');
+                    btn.disabled = true;
+                    btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>Enviando...`;
+                    
+                    setTimeout(() => {
+                        alert('🐾 Mensagem recebida! Nossa equipe veterinária entrará em contato em breve.');
+                        btn.disabled = false;
+                        btn.innerHTML = 'ENVIAR AGORA';
+                        form.reset();
+                    }, 1500);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
