@@ -1,0 +1,254 @@
+/* ==========================================================================
+   CSS DE AUTENTICAÇÃO (LOGIN E CRIAR CONTA) - REGIA & TINAS CARE
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --brand-pink: #FE8697;
+    --brand-pink-hover: #e57585;
+    --bg-light: #f8f8f8;
+    --text-dark: #333;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-light);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Cabeçalho do Site --- */
+.auth-header {
+    background-color: var(--brand-pink);
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+    font-family: 'Ribeye', cursive;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 10px rgba(254, 134, 151, 0.2);
+    z-index: 10;
+}
+
+/* --- Container Principal --- */
+.form-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.form-box {
+    background-color: var(--brand-pink);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(254, 134, 151, 0.3);
+    max-width: 420px;
+    width: 100%;
+}
+
+/* --- Cabeçalho do Formulário --- */
+.form-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.form-header .back-button {
+    position: absolute;
+    left: 0;
+    color: white;
+    font-size: 1.8rem;
+    transition: 0.3s ease;
+    text-decoration: none;
+}
+.form-header .back-button:hover {
+    transform: translateX(-4px);
+    color: #f1f1f1;
+}
+
+.form-header h1 {
+    font-family: 'Inknut Antiqua', serif;
+    font-size: 1.6rem;
+    color: white;
+    margin: 0;
+    text-align: center;
+}
+
+/* --- Inputs e Campos --- */
+.input-group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 15px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background-color: white;
+    color: var(--text-dark);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.95rem;
+    transition: 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #ffb3ba;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.input-group input::placeholder {
+    color: #999;
+}
+
+/* --- Olhinho da Senha --- */
+.eye-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+    z-index: 10;
+    font-size: 1.2rem;
+    transition: 0.2s;
+}
+.eye-icon:hover { color: var(--brand-pink); }
+#senha, #new_password, #confirm_new_password { padding-right: 45px; }
+
+/* --- Opções (Lembrar / Esqueci a senha) --- */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.85rem;
+    color: white;
+}
+
+.form-options label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.forgot-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+.forgot-link:hover { text-decoration: underline; opacity: 0.9; }
+
+/* --- Botões --- */
+.form-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.btn-solid, .btn-outline {
+    flex: 1;
+    padding: 12px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+/* Botão Entrar / Salvar (Branco com texto rosa) */
+.btn-solid {
+    background-color: white;
+    color: var(--brand-pink);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.btn-solid:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+.btn-solid:disabled {
+    background-color: #e9ecef;
+    color: #adb5bd;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Botão Criar Conta (Transparente com borda branca) */
+.btn-outline {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
+.btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* --- Redes Sociais --- */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 25px 0 20px;
+    color: white;
+    font-size: 0.85rem;
+    opacity: 0.9;
+}
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+.divider:not(:empty)::before { margin-right: 15px; }
+.divider:not(:empty)::after { margin-left: 15px; }
+
+.social-login {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.social-login a {
+    background-color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.social-login a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+.social-login a img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+/* --- Responsividade --- */
+@media (max-width: 480px) {
+    .form-box { padding: 30px 20px; border-radius: 15px; }
+    .form-header h1 { font-size: 1.4rem; }
+    .form-buttons { flex-direction: column; gap: 12px; }
+    .btn-solid, .btn-outline { width: 100%; }
+}
