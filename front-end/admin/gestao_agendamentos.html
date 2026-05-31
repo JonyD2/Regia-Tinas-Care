@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Agendamentos | Regia & Tinas Care</title>
+    <link rel="icon" type="image/png" href="../img/logo_pequena4.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        /* --- CSS PADRONIZADO E EMBUTIDO (ADMIN INTEGRADO) --- */
+        :root { 
+            --brand-pink: #FE8697; 
+            --brand-pink-hover: #e57585; 
+            --bg-light: #f4f6f9; 
+        }
+        
+        body { 
+            background-color: var(--bg-light); 
+            font-family: 'Poppins', sans-serif; 
+        }
+        
+        .brand-pink { color: var(--brand-pink); }
+        .bg-brand-pink { background-color: var(--brand-pink) !important; color: white !important; }
+        
+        /* Layout Sidebar Controlado */
+        .admin-sidebar { 
+            width: 260px; 
+            height: 100vh; 
+            position: fixed; 
+            left: 0; 
+            top: 0; 
+            background: #1e272e; 
+            display: flex; 
+            flex-direction: column; 
+            z-index: 1000; 
+        }
+        
+        .admin-main-content { 
+            margin-left: 260px; 
+            padding: 40px; 
+            min-height: 100vh; 
+        }
+        
+        .mascote-header { 
+            font-size: 1.8rem; 
+            transition: 0.3s; 
+            cursor: pointer; 
+            display: inline-block; 
+        }
+        .mascote-header:hover { transform: scale(1.2) rotate(10deg); }
+        
+        /* Navegação Sidebar */
+        .nav-link { 
+            border-radius: 10px; 
+            margin: 2px 10px; 
+            transition: 0.3s; 
+            color: #a4b0be; 
+        }
+        .nav-link.active { 
+            background: var(--brand-pink) !important; 
+            color: white !important; 
+            font-weight: 600;
+        }
+        .nav-link:hover:not(.active) { 
+            background: rgba(254, 134, 151, 0.1); 
+            color: var(--brand-pink); 
+        }
+        
+        .nav-section-title { 
+            font-size: 0.75rem; 
+            letter-spacing: 1px; 
+            color: #747d8c; 
+            margin-top: 1.5rem; 
+            padding: 0 1.5rem; 
+        }
+
+        /* Componentes e Filtros */
+        .dashboard-panel { 
+            background: white; 
+            border-radius: 20px; 
+            padding: 25px; 
+            border: none; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+        }
+
+        .filter-container { 
+            position: sticky; 
+            top: 0; 
+            background: var(--bg-light); 
+            z-index: 100; 
+            padding: 20px 0; 
+        }
+        
+        /* Badges de Status Personalizadas */
+        .status-badge { padding: 6px 12px; border-radius: 20px; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; display: inline-block; }
+        .status-pendente { background-color: #fff4e5; color: #ff9800; }
+        .status-confirmado { background-color: #e5f6ff; color: #03a9f4; }
+        .status-concluido { background-color: #f2fff5; color: #198754; }
+        .status-cancelado { background-color: #fce4e4; color: #d32f2f; }
+
+        .btn-action { width: 32px; height: 32px; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; margin-left: 4px; border: none; transition: 0.2s; }
+        .btn-action:hover { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <aside class="admin-sidebar shadow-lg">
+        <div class="sidebar-header text-center p-4">
+            <div class="mascote-header mb-2">👑</div>
+            <h4 class="fw-bold text-white mb-0">Regia & Tinas</h4>
+            <small class="text-white-50">ADMIN MASTER</small>
+        </div>
+        
+        <ul class="nav flex-column mt-3">
+            <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="bi bi-grid-1x2-fill me-2"></i>Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link active" href="gestao_agendamentos.html"><i class="bi bi-calendar-check me-2"></i>Agendamentos</a></li>
+            
+            <li class="nav-section-title text-uppercase fw-bold">Operacional (Equipe)</li>
+            <li class="nav-item"><a class="nav-link" href="operacional_atendimento.html"><i class="bi bi-person-badge me-2 text-warning"></i>Fila de Atendimento</a></li>
+            <li class="nav-item"><a class="nav-link" href="prontuarios.html"><i class="bi bi-journal-medical me-2"></i>Prontuários / Vet</a></li>
+            
+            <li class="nav-section-title text-uppercase fw-bold">Administrativo</li>
+            <li class="nav-item"><a class="nav-link" href="gestao_usuarios.html"><i class="bi bi-people-fill me-2"></i>Usuários e RH</a></li>
+            <li class="nav-item"><a class="nav-link" href="gestao_produtos.html"><i class="bi bi-box-seam me-2"></i>Estoque e Loja</a></li>
+        </ul>
+
+        <div class="logout-btn-container p-3 mt-auto">
+            <button class="btn btn-outline-danger w-100 rounded-pill btn-sm fw-bold shadow-sm" onclick="location.href='../usuario/login.html'"><i class="bi bi-box-arrow-right me-2"></i>Sair do Turno</button>
+        </div>
+    </aside>
+
+    <main class="admin-main-content">
+        <div class="filter-container">
+            <div class="d-flex justify-content-between align-items-end mb-4">
+                <div>
+                    <h2 class="fw-bold text-dark mb-0">Gestão de Agendamentos</h2>
+                    <p class="text-muted mb-0 small">Acompanhe e controle todas as reservas da rede.</p>
+                </div>
+                <button class="btn bg-brand-pink text-white fw-bold shadow-sm rounded-pill px-4" onclick="abrirModalNovoAgendamento()">
+                    <i class="bi bi-plus-circle me-2"></i>NOVO AGENDAMENTO
+                </button>
+            </div>
+            
+            <div class="dashboard-panel bg-white shadow-sm p-3">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="input-group border rounded-pill overflow-hidden bg-light">
+                            <span class="input-group-text bg-transparent border-0"><i class="bi bi-search brand-pink"></i></span>
+                            <input type="text" id="input-busca-agendamento" class="form-control border-0 bg-transparent" placeholder="Cliente, Pet ou ID...">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select border-0 bg-light rounded-pill" id="filtro-status">
+                            <option value="">Status: Todos</option>
+                            <option value="pendente">Pendentes</option>
+                            <option value="confirmado">Confirmados</option>
+                            <option value="concluido">Concluídos</option>
+                            <option value="cancelado">Cancelados</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select border-0 bg-light rounded-pill" id="filtro-funcionario">
+                            <option value="">Profissional: Todos</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select border-0 bg-light rounded-pill" id="filtro-servico">
+                            <option value="">Serviço: Todos</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-panel mt-2">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="small text-muted py-3">CLIENTE / PET</th>
+                            <th class="small text-muted py-3">SERVIÇO / PROFISSIONAL</th>
+                            <th class="small text-muted py-3">DATA E HORA</th>
+                            <th class="small text-muted py-3">VALOR (R$)</th>
+                            <th class="small text-muted py-3">STATUS</th>
+                            <th class="small text-muted py-3 text-end">AÇÕES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appointments-table-body">
+                        <tr id="loading-row-appointments">
+                            <td colspan="6" class="text-center p-5">
+                                <div class="spinner-border brand-pink" role="status"></div>
+                                <p class="mt-2 text-muted small fw-bold">Consultando agenda no Neon...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="modalNovoAgendamento" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
+                <div class="modal-header bg-brand-pink text-white border-0 p-4">
+                    <h5 class="fw-bold mb-0"><i class="bi bi-calendar-plus me-2"></i>Agendar Manualmente</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4 bg-light">
+                    <form id="form-agendamento-admin">
+                        <p class="text-muted small fw-bold mb-4">Use este formulário para agendamentos feitos via balcão ou telefone.</p>
+                        
+                        <div class="bg-white p-4 rounded-4 shadow-sm mb-3">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-bold text-muted">Localizar Cliente (Nome ou CPF)</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light border-0"><i class="bi bi-person"></i></span>
+                                        <input type="text" class="form-control bg-light border-0 rounded-end-3" placeholder="Pesquisar...">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-bold text-muted">Serviço</label>
+                                    <select class="form-select bg-light border-0 rounded-3">
+                                        <option value="">Selecione um serviço...</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-0 bg-white p-4">
+                    <button class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">CANCELAR</button>
+                    <button class="btn bg-brand-pink text-white rounded-pill px-5 fw-bold shadow">SALVAR AGENDAMENTO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/admin_agendamentos.js" type="module"></script>
+    <script>
+        function abrirModalNovoAgendamento() {
+            var myModal = new bootstrap.Modal(document.getElementById('modalNovoAgendamento'));
+            myModal.show();
+        }
+    </script>
+</body>
+</html>
